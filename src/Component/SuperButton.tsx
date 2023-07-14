@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './SuperButton.module.css'
-import {inspect} from 'util';
 
 type PropsType = {
     callBack: () => void
@@ -33,7 +32,7 @@ export const SuperButton: React.FC<PropsType> = (props) => {
     //                                ${disabled ? s.disabled : ''}`
 
     const finalClassName = `${s.button} 
-                                   ${color === 'red' ? s.red :color==='secondary'? s.secondary: s.default} 
+                                   ${color === 'red' ? s.red : color === 'secondary' ? s.secondary : s.default} 
                                    ${disabled ? s.disabled : ''}`
 
     return (
