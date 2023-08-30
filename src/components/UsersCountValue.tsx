@@ -5,7 +5,7 @@ type PropsType = {
 };
 
 export const UsersCountValue: FC<PropsType> = memo(({usersCount}) => {
-  const newUsersCount = usersCount + 1;
+  const newUsersCount = usersCount;
 
   return <span>Users count: {newUsersCount}</span>;
 });
