@@ -1,54 +1,30 @@
-import React, {Fragment, useCallback, useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {selectUsers, selectUsersCount} from 'store/selectors';
-import {createUser, plusUserCount} from 'store/actions';
-import {v1} from 'uuid';
-import {CustomButton, UsersCountValue} from 'components';
-import {UsersList} from 'components/UsersList';
-import {generateRandomName} from 'utils';
-import {SetTimeoutType} from 'types';
+import React, {Fragment} from 'react';
+import {Task_1} from "./task_1/Task_1";
+import {Task_2} from "./task_2/Task_2";
+import {Task_3} from "./task_3/Task_3";
+import {SlowComponent} from "./task_3/slowComponent/SlowComponent";
 
-const DELAY = 500;
+export type UserType = {
+  [key: string]: { name: string, id: string }
+};
+
+const DATA_7: UserType[] = [
+  {u1: {name: 'Gleb', id: '1'}},
+  {u2: {name: 'Dima', id: '2'}},
+  {u3: {name: 'Svetlana', id: '3'}},
+  {u4: {name: 'Artur', id: '4'}},
+  {u5: {name: 'Vera', id: '5'}},
+  {u6: {name: 'Vlad', id: '6'}},
+];
 
 export const App = () => {
-  const dispatch = useDispatch();
-
-  const users = useSelector(selectUsers);
-  const usersCount = useSelector(selectUsersCount);
-
-  const [isAddNewUser, setIsAddNewUser] = useState<boolean>(false);
-
-  useEffect(() => {
-    let timeoutId: SetTimeoutType = setTimeout((): void => {
-      setIsAddNewUser(false);
-    }, DELAY);
-
-    return () => clearTimeout(timeoutId);
-  }, [users.length]);
-
-  useEffect(() => {
-    if (users.length > 0 && isAddNewUser) {
-      dispatch(plusUserCount());
-    }
-  }, [dispatch, users.length, isAddNewUser]);
-
-  const handleClick = useCallback((): void => {
-
-    dispatch(createUser({id: v1(), name: generateRandomName()}));
-
-    setIsAddNewUser(true);
-  }, [dispatch]);
   return (
     <Fragment>
-      <UsersCountValue usersCount={usersCount} />
-
-      <CustomButton
-        title="Click Me"
-        isButtonDisabled={isAddNewUser}
-        onClick={handleClick}
-      />
-
-      <UsersList users={users} />
+      {/*<Task_1 />*/}
+      {/*<Task_2 />*/}
+      <Task_3 >
+        <SlowComponent/>
+      </Task_3>
     </Fragment>
   );
 };
